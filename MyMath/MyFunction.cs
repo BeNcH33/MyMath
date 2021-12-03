@@ -9,7 +9,7 @@ namespace MyMath
     class MyFunction
     {
         MyMaths MyMaths = new MyMaths();
-        public double InfCalc(double x)
+        public double MyMath(double x)
         {
             if (x <= 0)
             {

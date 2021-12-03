@@ -68,7 +68,7 @@ namespace MyMath
         [Test]
         public void TestNegativeAndNull()
         {
-            for (double x = -10; x <= -0.01; x += 0.01)
+            for (double x = -10; x <= 0; x += 0.01)
             {
                 Assert.AreEqual(MyFunction.MyMath(x), MyFunction.StandartMath(x), 0.1);
             }
@@ -77,7 +77,7 @@ namespace MyMath
         [Test]
         public void TestPositive()
         {            
-            for (double x = -10; x <= -0.01; x += 0.01)
+            for (double x = 1; x <= 10; x += 0.01)
             {
                 Assert.AreEqual(MyFunction.MyMath(x), MyFunction.StandartMath(x), 0.1);
             }

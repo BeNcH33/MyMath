@@ -1,9 +1,7 @@
 ﻿using NUnit.Framework;
+using OfficeOpenXml;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace MyMath
 {
@@ -20,11 +18,13 @@ namespace MyMath
         [Test]
         public void TestSin()
         {
-            var x = 5;
-            var actual = myMath.Sin(x);
-            var expected = Math.Sin(x);
-
-            Assert.AreEqual(expected, actual, 0.01);
+            //var x = 5;
+            for (double x = -10; x <= 10; x += 0.01)
+            {
+                var actual = myMath.Sin(x);
+                var expected = Math.Sin(x);
+                Assert.AreEqual(expected, actual, 0.01);
+            }
         }
 
         [Test]
@@ -39,11 +39,17 @@ namespace MyMath
         [Test]
         public void TestCos()
         {
-            var x = 5;
-            var actual = myMath.Cos(x);
-            var exp = Math.Cos(x);
 
-            Assert.AreEqual(actual, exp, 0.01);
+            StreamWriter f = new StreamWriter("test.txt");
+            
+            for (double x = -10; x <= 10; x += 0.01)
+            {
+                var actual = myMath.Cos(x);
+                var exp = Math.Cos(x);
+                Assert.AreEqual(actual, exp, 0.01);
+                f.WriteLine($"Значение x={Math.Round(x, 2)}, MyMath={actual}, ожидаемое={exp} ");
+            }
+            f.Close();
         }
 
         [Test]
@@ -62,19 +68,19 @@ namespace MyMath
         [Test]
         public void TestNegativeAndNull()
         {
-            Assert.AreEqual(MyFunction.MyMath(-3), MyFunction.StandartMath(-3), 0.1);
-            Assert.AreEqual(MyFunction.MyMath(-3), MyFunction.StandartMath(-3), 0.1);
-            Assert.AreEqual(MyFunction.MyMath(-2), MyFunction.StandartMath(-2), 0.1);
-            Assert.AreEqual(MyFunction.MyMath(-1), MyFunction.StandartMath(-1), 0.1);
+            for (double x = -10; x <= -0.01; x += 0.01)
+            {
+                Assert.AreEqual(MyFunction.MyMath(x), MyFunction.StandartMath(x), 0.1);
+            }
 
         }
         [Test]
         public void TestPositive()
-        {
-            Assert.AreEqual(MyFunction.MyMath(3), MyFunction.StandartMath(3), 0.1);
-            Assert.AreEqual(MyFunction.MyMath(3), MyFunction.StandartMath(3), 0.1);
-            Assert.AreEqual(MyFunction.MyMath(2), MyFunction.StandartMath(2), 0.1);
-            Assert.AreEqual(MyFunction.MyMath(1), MyFunction.StandartMath(1), 0.1);
+        {            
+            for (double x = -10; x <= -0.01; x += 0.01)
+            {
+                Assert.AreEqual(MyFunction.MyMath(x), MyFunction.StandartMath(x), 0.1);
+            }
 
         }
     }
